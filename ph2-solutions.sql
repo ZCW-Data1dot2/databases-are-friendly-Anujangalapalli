@@ -25,7 +25,7 @@ WHERE last_name like '%GEN%';
 SELECT last_name, first_name
 FROM actor
 WHERE last_name like '%LI%'
-ORDER BY last_name, first_name ASC;
+ORDER BY last_name, first_name;
 
 
 --2d. Using IN, display the country_id and country columns of the following countries: Afghanistan, Bangladesh, and China:
@@ -71,7 +71,7 @@ WHERE actor_id = 172;
 
 
 --5a. You cannot locate the schema of the address table. Which query would you use to re-create it?
-DESC address;
+SHOW CREATE TABLE address;
 
 
 --6a. Use JOIN to display the first and last names, as well as the address, of each staff member. Use the tables staff and address:
@@ -81,12 +81,12 @@ INNER JOIN address a
 ON a.address_id = s.address_id;
 
 --6b. Use JOIN to display the total amount rung up by each staff member in August of 2005. Use tables staff and payment.
-SELECT s.first_name, s.last_name, COUNT(p.amount)
+SELECT s.first_name, s.last_name, SUM(p.amount)
 FROM staff s
 INNER JOIN payment p
 ON s.staff_id = p.staff_id
 AND p.payment_date LIKE '2005-08-%'
-GROUP BY s.first_name, s.last_name, p.amount;
+GROUP BY s.first_name, s.last_name;
 
 
 --6c. List each film and the number of actors who are listed for that film. Use tables film_actor and film. Use inner join.
